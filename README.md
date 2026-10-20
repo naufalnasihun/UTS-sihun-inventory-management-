@@ -1,58 +1,187 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Aplikasi Manajemen Inventaris
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi Manajemen Inventaris berbasis Laravel untuk mengelola data kategori dan barang. Aplikasi ini dibuat untuk memenuhi tugas Ujian Tengah Semester (UTS) dengan menerapkan autentikasi, operasi CRUD, validasi data, dan relasi antartabel.
 
-## About Laravel
+## Fitur Aplikasi
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Login dan Logout** untuk membatasi akses pengguna.
+- **Autentikasi pengguna** menggunakan session.
+- **Password hashing** untuk menyimpan kata sandi secara aman.
+- **Dashboard** untuk menampilkan halaman utama aplikasi.
+- **Manajemen Kategori** meliputi tambah, lihat, edit, dan hapus kategori.
+- **Manajemen Barang** meliputi tambah, lihat, edit, dan hapus barang.
+- **Relasi Kategori dan Barang** menggunakan foreign key.
+- **Validasi Input** untuk memastikan data yang dimasukkan sesuai ketentuan.
+- **Middleware Auth** untuk melindungi halaman yang memerlukan login.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Teknologi yang Digunakan
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP
+- Laravel
+- MySQL
+- phpMyAdmin
+- HTML dan CSS
+- Git dan GitHub
 
-## Learning Laravel
+## Persyaratan
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Pastikan perangkat sudah memiliki:
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP sesuai versi Laravel yang digunakan.
+- Composer.
+- MySQL atau MariaDB.
+- Laragon.
+- Git.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Instalasi dan Menjalankan Aplikasi
 
-## Agentic Development
+### 1. Clone Repository
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+Jika project diambil dari GitHub, jalankan:
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone URL_REPOSITORY_KAMU
+cd uts-inventaris
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Ganti `URL_REPOSITORY_KAMU` dengan URL repository GitHub milikmu.
 
-## Contributing
+Jika project sudah tersedia di komputer, buka folder project melalui VS Code.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 2. Install Dependency
 
-## Code of Conduct
+Jalankan perintah berikut di terminal:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+composer install
+```
 
-## Security Vulnerabilities
+### 3. Konfigurasi Environment
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Salin file konfigurasi:
 
-## License
+```bash
+copy .env.example .env
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Jika file `.env` sudah tersedia, langkah ini dapat dilewati.
+
+Buka file `.env`, lalu sesuaikan konfigurasi database:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=inventaris_uts
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Sesuaikan username dan password MySQL dengan konfigurasi Laragon di komputer masing-masing.
+
+### 4. Buat Database
+
+1. Jalankan Laragon dan aktifkan layanan database.
+2. Buka phpMyAdmin melalui menu Laragon.
+3. Buat database bernama `inventaris_uts`.
+4. Gunakan collation `utf8mb4_unicode_ci` jika tersedia.
+
+### 5. Generate Application Key
+
+Jalankan:
+
+```bash
+php artisan key:generate
+```
+
+### 6. Jalankan Migration dan Seeder
+
+Untuk membuat tabel dan mengisi data awal:
+
+```bash
+php artisan migrate --seed
+```
+
+**Catatan:** Jika database sudah berisi data penting, jangan menggunakan `php artisan migrate:fresh --seed` karena perintah tersebut akan menghapus tabel dan membuatnya kembali.
+
+### 7. Jalankan Aplikasi
+
+```bash
+php artisan serve
+```
+
+Buka alamat berikut di browser:
+
+```text
+http://127.0.0.1:8000
+```
+
+## Struktur Database
+
+### Tabel `categories`
+
+Menyimpan data kategori barang.
+
+| Kolom | Keterangan |
+|---|---|
+| `id` | Primary key |
+| `name` | Nama kategori |
+| `created_at` | Waktu data dibuat |
+| `updated_at` | Waktu data diperbarui |
+
+### Tabel `items`
+
+Menyimpan data barang inventaris.
+
+| Kolom | Keterangan |
+|---|---|
+| `id` | Primary key |
+| `category_id` | Foreign key ke tabel `categories` |
+| `name` | Nama barang |
+| `price` | Harga barang |
+| `stock` | Jumlah stok |
+| `created_at` | Waktu data dibuat |
+| `updated_at` | Waktu data diperbarui |
+
+Relasi database: satu kategori dapat memiliki banyak barang (*one-to-many*).
+
+## Akun Demo
+
+Jika seeder akun demo sudah dijalankan dan menggunakan kredensial berikut, kamu dapat mencoba login dengan:
+
+- **Email:** `admin@inventaris.test`
+- **Password:** `Admin123!`
+
+Jika akun tersebut tidak tersedia, periksa konfigurasi seeder pengguna pada project.
+
+## Pengujian Aplikasi
+
+Pengujian dapat dilakukan dengan langkah berikut:
+
+1. Membuka halaman login.
+2. Mencoba login dengan akun yang valid.
+3. Memastikan pengguna yang belum login tidak dapat membuka halaman yang dilindungi.
+4. Menguji tambah, lihat, edit, dan hapus kategori.
+5. Menguji tambah, lihat, edit, dan hapus barang.
+6. Memastikan validasi berjalan ketika input tidak sesuai.
+7. Memastikan relasi kategori dan barang berfungsi.
+8. Melakukan logout dan memastikan akses kembali memerlukan login.
+
+## Keamanan
+
+- Password disimpan dalam bentuk hash.
+- Halaman tertentu dilindungi menggunakan middleware autentikasi.
+- Input divalidasi sebelum disimpan.
+- Relasi database menggunakan foreign key untuk menjaga integritas data.
+
+## Pengembang
+
+- **Nama:** [Naufal Nashihun Nizhom]
+- **NIM:** [2495114016]
+- **Program Studi:** Teknik Informatika
+- **Mata Kuliah:** [Pemogroman Web Lanjnut]
+- **Tugas:** Ujian Tengah Semester (UTS)
+
+---
+
+Dibuat untuk memenuhi tugas Ujian Tengah Semester (UTS) pada pengembangan aplikasi berbasis Laravel.
